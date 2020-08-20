@@ -1,0 +1,20 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="/" class="logo brand-logo">Todos</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+            {{#if isIndex}}
+                <li class="navli active"><a href="/">Todos</a></li>
+            {{else}}
+                <li><a href="/" class="navli">Todos</a></li>
+            {{/if}}
+
+            {{#if isCreate}}
+                <li class="navli active"><a href="/create">Create</a></li>
+            {{else}}
+                <li><a href="/create" class="navli">Create</a></li>
+            {{/if}}
+
+        </ul>
+    </div>
+</nav>
