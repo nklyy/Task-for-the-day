@@ -1,18 +1,18 @@
 <nav>
     <div class="nav-wrapper">
-        <a href="/" class="logo brand-logo">Todos</a>
+        <a href="/" class="logo brand-logo">Задачи на день</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 
             {{#if isIndex}}
-                <li class="navli active"><a href="/">Todos</a></li>
+                <li class="navli active"><a href="/">Задачи</a></li>
             {{else}}
-                <li><a href="/" class="navli">Todos</a></li>
+                <li><a href="/" class="navli">Задачи</a></li>
             {{/if}}
 
             {{#if isCreate}}
-                <li class="navli active"><a href="/create">Create</a></li>
+                <li class="navli active"><a href="/create">Создать</a></li>
             {{else}}
-                <li><a href="/create" class="navli">Create</a></li>
+                <li><a href="/create" class="navli">Создать</a></li>
             {{/if}}
 
         </ul>
