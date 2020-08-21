@@ -121,8 +121,4 @@ router.post('/register' ,[
   // res.redirect('/login')
 })
 
-
-
-
-
 module.exports = router;
