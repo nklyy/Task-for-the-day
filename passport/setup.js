@@ -15,23 +15,20 @@ passport.deserializeUser((id, done) => {
 
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
   const user = await User.findOne({ email: email })
-  // const pass = await bcrypt.compare(password, user.password)
 
   if (!user) {
-    return done(null, false, {message: 'No user with this email'})
+    return done(null, false, {message: 'Пользоввателя с таким email не существует'})
   }
 
   try {
     if (await bcrypt.compare(password, user.password)) {
       return done(null, user)
     } else {
-      return done(null, false, {message: 'Wrong password'})
+      return done(null, false, {message: 'Не правильный пароль'})
     }
   } catch (e) {
     return done(e)
   }
-
-
 }))
 
 module.exports = passport

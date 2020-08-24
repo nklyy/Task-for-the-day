@@ -1,22 +1,27 @@
 <nav>
-    <div class="nav-wrapper">
-        <a href="/" class="logo brand-logo">Задачи на день</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+  <div class="nav-wrapper">
+    <a href="/" class="logo brand-logo">Задачи на день</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
 
-            {{#if isIndex}}
-                <li class="navli active"><a href="/">Задачи</a></li>
-            {{else}}
-                <li><a href="/" class="navli">Задачи</a></li>
-            {{/if}}
+      {{#if isIndex}}
+        <li class="navli active"><a href="/">Задачи</a></li>
+      {{else}}
+        <li><a href="/" class="navli">Задачи</a></li>
+      {{/if}}
 
-            {{#if isCreate}}
-                <li class="navli active"><a href="/create">Создать</a></li>
-            {{else}}
-                <li><a href="/create" class="navli">Создать</a></li>
-            {{/if}}
+      {{#if isCreate}}
+        <li class="navli active"><a href="/create">Создать</a></li>
+      {{else}}
+        <li><a href="/create" class="navli">Создать</a></li>
+      {{/if}}
 
-<!--            <li class="navli active"><a href="/">Выйти</a></li>-->
+      {{#if isCreate}}
+        <li class="navli active"><a href="/logout">Выйти</a></li>
+      {{else}}
+        <li><a href="/logout" class="navli">Выйти</a></li>
+      {{/if}}
 
-        </ul>
-    </div>
+      <!--            <li class="navli active"><a href="/">Выйти</a></li>-->
+    </ul>
+  </div>
 </nav>

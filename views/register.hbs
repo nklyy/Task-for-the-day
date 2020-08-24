@@ -1,6 +1,9 @@
-<h1 class="center">Регистрация</h1>
-<form action="/register" method="POST">
-  <div class="row">
+<div class="row z-depth-2">
+<h1 class="center">Регистрация<i for="name" class="iconReg material-icons">person_add</i></h1>
+
+<div class="row">
+  {{> messages}}
+  <form action="/register" method="POST">
     <div class="input-field col s12 m4 l6 offset-l3 center">
       <i class="material-icons prefix">account_circle</i>
       <input id="icon_prefix" type="text" class="validate" name="name" required>
@@ -19,6 +22,8 @@
       </div>
       <button class="btn btn-small waves-effect red lighten-2">Зарегистрироваться</button>
       <a href="/login" class="btn btn-small waves-effect red lighten-2">Войти</a>
+      <p>Have An Account? <a href="/login">Login</a></p>
     </div>
-  </div>
-</form>
+  </form>
+</div>
+</div>
