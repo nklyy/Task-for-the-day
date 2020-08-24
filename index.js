@@ -50,7 +50,7 @@ app.use(todoRoutes);
 
 async function start() {
     try {
-        await mongoose.connect("mongodb+srv://nkly:Maximum78952@cluster0.7j7rj.mongodb.net/todos", {
+        await mongoose.connect("mongodb+srv://<username>:<password>@cluster0.7j7rj.mongodb.net/<dbname>", {
             useNewUrlParser: true,
             useFindAndModify: false,
             useUnifiedTopology: true,
