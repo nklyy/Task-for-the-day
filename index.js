@@ -7,7 +7,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport/setup')
 const flash = require('connect-flash')
-
+const config = require('config')
 const PORT = process.env.PORT || 3000;
 
 const app = express();
@@ -22,7 +22,7 @@ app.set('views', 'views');
 
 app.use(
   session({
-    secret: 'very secret key',
+    secret: config.get("secretKey"),
     saveUninitialized: true,
     resave: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection})
@@ -50,7 +50,7 @@ app.use(todoRoutes);
 
 async function start() {
     try {
-        await mongoose.connect("mongodb+srv://nkly:Maximum78952@cluster0.7j7rj.mongodb.net/todos", {
+        await mongoose.connect(config.get('mongoUrl'), {
             useNewUrlParser: true,
             useFindAndModify: false,
             useUnifiedTopology: true,

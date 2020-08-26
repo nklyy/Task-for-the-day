@@ -1,0 +1,13 @@
+<form action="/update" method="POST">
+  <h2 class="cpage">Редактировать название</h2>
+
+  <div class="input-field">
+    <input placeholder='Укажите новое имя задачи' type="text" name="title" autofocus>
+    <label>Todo title</label>
+    <input type="hidden" value="{{idUp}}" name="id">
+  </div>
+  <div>
+    <button type="submit" class="btn">Редактировать</button>
+    <a href="/" class="btn">Назад</a>
+  </div>
+</form>

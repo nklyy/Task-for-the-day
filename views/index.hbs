@@ -22,11 +22,11 @@
             <div>
               <button class="btn btn-small">Save</button>
               <button class="btn btn-small" formaction="/delete">Delete</button>
+              <button formaction="{{ _id }}" formmethod="GET" class="btn btn-small"><i class="material-icons prefix">edit</i></button>
             </div>
           </label>
         </form>
       </li>
-
     {{/each}}
   </ul>
 {{else}}

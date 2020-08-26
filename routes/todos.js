@@ -112,4 +112,26 @@ router.get('/logout', (req, res) => {
   res.redirect('/login')
 })
 
+router.get('/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const todo = await Todo.findById(req.params.id);
+    res.render('update', {
+      idUp: todo._id
+    })
+  } catch (e) {
+    res.render('404')
+  }
+})
+
+router.post('/update', async (req, res) => {
+  const todo = await Todo.findById(req.body.id)
+  todo.title = req.body.title
+  await todo.save()
+  res.redirect('/')
+})
+
+router.get('*', (req, res) => {
+  res.render('404')
+})
+
 module.exports = router;
