@@ -8,7 +8,8 @@ const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport/setup')
 const flash = require('connect-flash')
 const config = require('config')
-const PORT = process.env.PORT || 3000;
+// const cookieParser = require('cookie-parser')
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 const hbs = exphbs.create({
@@ -41,6 +42,8 @@ app.use((req, res, next) => {
 })
 
 app.use(express.urlencoded({ extended:true }));
+
+// app.use(cookieParser())
 
 app.use(express.json())
 

@@ -1,34 +1,71 @@
 {{> navbar}}
 
 <h2 class="tpage center">Все задачи</h2>
+<div>
+  {{#if todos.length}}
+    <ul>
+      {{#each todos}}
+        <li class="todo">
+          <form action="/complete" method="POST">
+            {{#unless completed}}
+              <div>
+                <label>
+                  <input type="checkbox" name="completed">
+                  <span>{{ title }}</span>
+                  <span class="created"><b><i>Created: </i></b>{{ date }}</span>
 
-{{#if todos.length}}
-  <ul>
-    {{#each todos}}
-      <li class="todo">
-        <form action="/complete" method="POST">
-          <label>
+                  <input type="hidden" value="{{_id}}" name="id">
+                  <div>
+                    <button class="btn btn-small">Save</button>
+                    <button class="btn btn-small" formaction="/delete">Delete</button>
+                    <button formaction="{{ _id }}" formmethod="GET" class="btn btn-small"><i
+                        class="material-icons prefix">edit</i>
+                    </button>
+
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                  </div>
+                </label>
+              </div>
+            {{/unless}}
+          </form>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>Нет задач!</p>
+  {{/if}}
+</div>
+
+<div class="comleteTask">
+  <hr>
+  {{#if todos.length}}
+    <ul>
+      {{#each todos}}
+        <li class="todo">
+          <form action="/complete" method="POST">
             {{#if completed}}
-              <input type="checkbox" checked name="completed">
-              <span class="completed">{{ title }}</span>
-              <span class="created"><b><i>Created: </i></b>{{ date }}</span>
-            {{else}}
-              <input type="checkbox" name="completed">
-              <span>{{ title }}</span>
-              <span class="created"><b><i>Created: </i></b>{{ date }}</span>
-            {{/if}}
+              <div>
+                <label>
+                  <input type="checkbox" checked name="completed">
+                  <span class="completed">{{ title }}</span>
+                  <span class="created"><b><i>Created: </i></b>{{ date }}</span>
 
-            <input type="hidden" value="{{_id}}" name="id">
-            <div>
-              <button class="btn btn-small">Save</button>
-              <button class="btn btn-small" formaction="/delete">Delete</button>
-              <button formaction="{{ _id }}" formmethod="GET" class="btn btn-small"><i class="material-icons prefix">edit</i></button>
-            </div>
-          </label>
-        </form>
-      </li>
-    {{/each}}
-  </ul>
-{{else}}
-  <p>Нет задач!</p>
-{{/if}}
+                  <input type="hidden" value="{{_id}}" name="id">
+                  <div>
+                    <button class="btn btn-small">Save</button>
+                    <button class="btn btn-small" formaction="/delete" type="submit">Delete</button>
+                    <button formaction="{{ _id }}" formmethod="GET" class="btn btn-small"><i
+                        class="material-icons prefix">edit</i>
+                    </button>
+
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                  </div>
+                </label>
+              </div>
+            {{/if}}
+          </form>
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</div>

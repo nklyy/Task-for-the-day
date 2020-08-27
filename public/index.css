@@ -56,6 +56,11 @@ nav .brand-logo {
     font-size: 55px;
     vertical-align: bottom;
 }
+
+.comleteTask {
+    margin-top: 30px;
+}
+
 /*!* The alert message box *!*/
 /*.alert {*/
 /*    padding: 20px;*/

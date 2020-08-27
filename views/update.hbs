@@ -6,6 +6,7 @@
     <label>Todo title</label>
     <input type="hidden" value="{{idUp}}" name="id">
   </div>
+  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
   <div>
     <button type="submit" class="btn">Редактировать</button>
     <a href="/" class="btn">Назад</a>

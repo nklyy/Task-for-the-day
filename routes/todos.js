@@ -6,25 +6,30 @@ const {check, validationResult} = require('express-validator')
 const passport = require('passport')
 const { ensureAuthenticated, forwardAuthenticated } = require('../middleware/auth')
 router = Router();
+const csrf = require('csurf')
 
-router.get('/', ensureAuthenticated, async (req, res) => {
+const csrfProtection = csrf()
+//router.use(csrfProtection) //-- Что бы защитить все роуты
+
+router.get('/', csrfProtection, ensureAuthenticated, async (req, res) => {
   const todos = await Todo.find({owner: req.user.id}).lean();
-
   res.render('index', {
     title: 'Todos List',
     isIndex: true,
-    todos
+    todos,
+    csrfToken: req.csrfToken()
   });
 });
 
-router.get('/create', ensureAuthenticated ,(req, res) => {
+router.get('/create', csrfProtection, ensureAuthenticated ,(req, res) => {
   res.render('create', {
     title: 'Create Todo',
-    isCreate: true
+    isCreate: true,
+    csrfToken: req.csrfToken()
   });
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create', csrfProtection,async (req, res) => {
   const todo = new Todo({
     title: req.body.title,
     date: Date(),
@@ -51,11 +56,13 @@ router.post('/delete', async (req, res) => {
   res.redirect('/')
 })
 
-router.get('/login', forwardAuthenticated, (req, res) => {
-  res.render('login')
+router.get('/login', csrfProtection,forwardAuthenticated, (req, res) => {
+  res.render('login', {
+    csrfToken: req.csrfToken()
+  })
 })
 
-router.post('/login' , (req, res, next) => {
+router.post('/login',csrfProtection, (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
@@ -63,11 +70,13 @@ router.post('/login' , (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/register', forwardAuthenticated, (req, res) => {
-  res.render('register')
+router.get('/register', csrfProtection,forwardAuthenticated, (req, res) => {
+  res.render('register', {
+    csrfToken: req.csrfToken()
+  })
 })
 
-router.post('/register' ,[
+router.post('/register' , csrfProtection,[
   check('email', 'Некоректный email.').isEmail(),
   check('password', 'Минимальная длинна пароля 6 символов.').isLength({min: 6})
   ],async (req, res) => {
@@ -107,23 +116,24 @@ router.post('/register' ,[
   }
 })
 
-router.get('/logout', (req, res) => {
+router.get('/logout', csrfProtection,(req, res) => {
   req.logout();
   res.redirect('/login')
 })
 
-router.get('/:id', ensureAuthenticated, async (req, res) => {
+router.get('/:id', csrfProtection, ensureAuthenticated, async (req, res) => {
   try {
     const todo = await Todo.findById(req.params.id);
     res.render('update', {
-      idUp: todo._id
+      idUp: todo._id,
+      csrfToken: req.csrfToken()
     })
   } catch (e) {
     res.render('404')
   }
 })
 
-router.post('/update', async (req, res) => {
+router.post('/update', csrfProtection, async (req, res) => {
   const todo = await Todo.findById(req.body.id)
   todo.title = req.body.title
   await todo.save()
@@ -131,7 +141,8 @@ router.post('/update', async (req, res) => {
 })
 
 router.get('*', (req, res) => {
-  res.render('404')
+  res.render('404', {
+  })
 })
 
 module.exports = router;

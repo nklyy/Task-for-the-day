@@ -13,8 +13,10 @@
           <input id="icon_telephone" type="password" class="validate" name="password" required>
           <label for="icon_telephone">Password</label>
         </div>
+
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <button class="btn btn-small waves-effect red lighten-2">Войти</button>
-        <a href="/register" class="btn btn-small waves-effect red lighten-2">Зарегистрироваться</a>
+<!--        <a href="/register" class="btn btn-small waves-effect red lighten-2">Зарегистрироваться</a>-->
         <p>No Account? <a href="/register">Register</a></p>
       </div>
     </div>
