@@ -24,8 +24,8 @@ app.set('views', 'views');
 app.use(
   session({
     secret: config.get("secretKey"),
-    saveUninitialized: true,
-    resave: true,
+    saveUninitialized: false,
+    resave: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection})
   })
 )

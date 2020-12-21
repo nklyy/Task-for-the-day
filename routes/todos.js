@@ -56,7 +56,7 @@ router.post('/delete', async (req, res) => {
   res.redirect('/')
 })
 
-router.get('/login', csrfProtection,forwardAuthenticated, (req, res) => {
+router.get('/login', csrfProtection, forwardAuthenticated, (req, res) => {
   res.render('login', {
     csrfToken: req.csrfToken()
   })
